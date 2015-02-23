@@ -1,0 +1,79 @@
+#Get Xcode command line tools
+xcode-select --install
+sudo xcodebuild -license
+
+
+#brew and cask
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew doctor && brew update
+brew install caskroom/cask/brew-cask
+brew install readline
+brew link readline
+
+#zsh
+brew install zsh
+sudo echo “/usr/local/bin/zsh” >> /etc/shells
+curl -L http://install.ohmyz.sh | sh
+
+#update git
+brew install git
+echo ‘export PATH="/usr/local/bin:$PATH"' >> ~/.zshrc
+
+#add support for fonts
+brew tap caskroom/fonts
+
+#add dev/beta versions
+brew tap caskroom/versions
+
+brew cask install sublime-text3
+brew cask install font-source-code-pro
+
+
+#RUBY
+brew install rbenv ruby-build
+echo 'if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi' >> ~/.zshrc
+source ~/.zshrc
+RUBY_CONFIGURE_OPTS=--with-readline-dir="$(brew --prefix readline)" rbenv install 2.1.5
+rbenv global 2.1.5
+echo "gem: --no-document" > .gemrc
+gem install rails
+gem install sass
+rbenv rehash
+
+#NODE
+curl https://raw.githubusercontent.com/creationix/nvm/v0.23.3/install.sh | zsh
+source .zshrc
+nvm install v0.10.26
+nvm alias default v0.10.36
+npm install -g gulp bower grunt grunt-cli 
+
+#R
+
+brew tap homebrew/science
+brew install Caskroom/cask/xquartz
+brew install r
+
+
+
+#Vagrant
+brew cask install virtualbox
+brew cask install vagrant
+
+####config
+
+#expand save panel by default 
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+
+# Disable press-and-hold for keys in favor of key repeat
+
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
+# Set a blazingly fast keyboard repeat rate
+
+defaults write NSGlobalDomain KeyRepeat -int 0
+
+#purge DSAssets
+brew cask install asepsis
+

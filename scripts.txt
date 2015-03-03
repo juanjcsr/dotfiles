@@ -59,6 +59,7 @@ brew install python3
 mdkir ~/virtualenvs
 pip install virtualenv
 echo "export PIP_REQUIRE_VIRTUALENV=true" >> ~/.zshrc
+echo "gpip(){PIP_REQUIRE_VIRTUALENV="" pip '$@'}" >> /.zshrc
 source ~/.zshrc
 
 #Vagrant
